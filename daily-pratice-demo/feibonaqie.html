@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fibonacci</title>
+</head>
+
+<body>
+    <ul>
+        <li id="slide1" class="active"><a href="javascript:void(0);">1</a></li>
+        <li id="slide2" class=""><a href="javascript:void(0);">2</a></li>
+        <li id="slide3" class=""><a href="javascript:void(0);">3</a></li>
+    </ul>
+    <script>
+        // 数组从0开始
+        var fibonacci = [];
+        fibonacci[0] = 1;
+        fibonacci[1] = 2;
+        for (let i = 2; i < 20; i++) {
+            fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+        }
+        for (let i = 0; i < fibonacci.length; i++) {
+            console.log(i, fibonacci[i]);
+        }
+        console.log(`${fibonacci}`)
+    </script>
+</body>{}
+
+</html>

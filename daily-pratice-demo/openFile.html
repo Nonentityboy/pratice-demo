@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>带蒙层的弹出框</title>
+    <style>
+        #mask {
+            background: #000;
+            opacity: 0.75;
+            /* 兼容IE */
+            filter: alpha(opacity=75);
+            /*整个页面的高度，要动态获取*/
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        #login {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 1001;
+        }
+        
+        .modal-content {
+            background: #fff;
+            width: 670px;
+            height: 380px;
+            text-align: center;
+            position: relative;
+        }
+        
+        #close {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+    </style>
+</head>
+ 
+<body>
+    <button id="login">点我弹出</button>
+    <!-- <div id="mask"></div>
+    <div id="login">
+        <div class="modal-content">
+            我是一个模态框
+            <div id="close">❌</div>
+        </div>
+    </div> -->
+    <script>
+        window.onload = function() {
+            var btn = document.getElementById("login");
+            btn.onclick = function() {
+                // 获取页面高度和宽度
+                var sWidth = document.documentElement.scrollWidth;
+                var sHeight = document.documentElement.scrollHeight;
+                // 获取页面可视区高度和宽度
+                var cWidth = document.documentElement.clientWidth;
+                var cHeight = document.documentElement.clientHeight;
+                var mask = document.createElement("div");
+                mask.id = "mask";
+                mask.style.width = sWidth + 'px';
+                mask.style.height = sHeight + 'px';
+                document.body.appendChild(mask);
+                var login = document.createElement("div");
+                login.id = "login";
+                login.innerHTML = "<div class='modal-content'>我是一个模态框<div id='close'>❌</div></div>";
+                document.body.appendChild(login);
+                // 获取login元素的宽度和高度
+                var oWidth = login.offsetWidth;
+                var oHeight = login.offsetHeight;
+                login.style.left = (cWidth - oWidth) / 2 + 'px';
+                login.style.top = (cHeight - oHeight) / 2 + 'px';
+                var close = document.getElementById("close");
+                mask.onclick = close.onclick = function() {
+                    document.body.removeChild(mask);
+                    document.body.removeChild(login);
+                };
+            };
+        };
+    </script>
+</body>
+ 
+</html>

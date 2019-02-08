@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Todolist</title>
+        <script src="./vue.js"></script>
+    </head>
+    <body>
+        <!-- 一直在操作数据 MVVM设计模式 -->
+        <!-- view(DOM,标签)   VM层(虚拟DOM) define proptes    Model(数据) DOM操作极大简化 减少代码量 -->
+        <!-- 前端组件化 -->
+
+
+        <!-- M 模型层(边缘)  V 视图层  P 控制器(中转站,最核心)大部分操作在DOM -->
+        <div id="app">
+            <input type="text" v-model="inputValue"/>
+            <button v-on:click="handleBtnClick">提交</button>
+            <ul>
+                <!-- v-for 标签指令 -->
+                <li v-for="item in list">{{item}}</li>
+            </ul>
+        </div>
+        <script>
+            var app = new Vue({
+                el:'#app',
+                data:{
+                    list:[],
+                    inputValue:''
+                },
+                // app.$data.inputValue 数据双向绑定
+                methods:{
+                    handleBtnClick:function(){
+                        this.list.push(this.inputValue)
+                        this.inputValue = ''
+                    }
+                }
+            })
+        </script>
+
+    </body>
+</html> 

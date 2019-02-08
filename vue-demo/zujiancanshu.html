@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>组件参数校验与非Props特性</title>
+    <meta charset="utf-8">
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child content="hello world"></child>
+        <!-- 
+            :content
+            content: [Number, String]
+            content:{
+                type:String,
+                required:false,
+                default:'default value'
+                //默认值
+                validator:function(value){
+                    //校验器
+                    return (value.length >5 )
+                }
+            }
+
+            非props属性：父组件传 子组件接
+            传数字需要加 冒号 比如：  :content -->
+        <!-- Number, String就可以 -->
+    </div>
+    <script>
+        Vue.component('child', {
+            props: {
+                content: [Number, String]
+            },
+            template: '<div>{{content}}</div>'
+        })
+        var app = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>

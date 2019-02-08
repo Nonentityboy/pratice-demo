@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue中的插槽（slot）</title>
+    <meta charset="utf-8">
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child>
+            <!-- <div slot="header">header</div> -->
+            <p>hello</p>
+        </child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['content'],
+            template:   `<div>
+                            <p>hello</p>
+                            <slot name="header">默认内容</slot>
+                        </div>`
+        })
+        var app = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>
+
+
+<!-- <div id="app">
+        <child content='<p>Dell</p><p>Dell</p><p>Dell</p><p>Dell</p>'></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props:['content'],
+            template: `<div>
+                            <p>hello</p>
+                            <div v-html="this.content"></div>
+                        </div>`
+        })
+        var app = new Vue({
+            el: '#app',
+        })
+    </script> -->

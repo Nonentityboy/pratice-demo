@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue中的条件渲染</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="show" data-test="v-if">{{content}}</div>
+        <div v-show="show" data-test="v-show">{{content}}</div>
+        <!-- v-if与v-else必须连在一起写 -->
+        <!-- v-show性能更高，不会频繁操作DOM 仅仅将样式写成display none-->
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: false,
+                content: 'hello world'
+            }
+        })
+
+    </script>
+</body>
+
+</html>

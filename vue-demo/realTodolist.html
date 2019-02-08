@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Todolist</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue" />
+        <button @click="handleBtnClick">提交</button>
+        <ul>
+            <!-- <li v-for="item in list">{{item}}</li> -->
+            <todo-item  :content="item" 
+                        :index="index"
+                        v-for="(item,index) in list"
+                        @delete="handleItemDelete">
+            </todo-item>
+            <!-- TodoItem TI大写 可以小写用  必须用-   -->
+        </ul>
+    </div>
+    <script>
+
+        // 全局组件的使用
+        // Vue.component("TodoItem", {
+        //     props: ['content'],
+        //     template: "<li>{{content}}</li>"
+        // })
+
+        var TodoItem = {
+            props:['content','index'],
+            template: "<li @click='handleItemClick'>{{content}}</li>",
+            methods:{
+                handleItemClick:function(){
+                    this.$emit("delete",this.index)
+                }
+            }
+        }
+        //console.log(app.$data) $destroy销毁
+        var app = new Vue({
+            el: '#app',
+            components:{
+                TodoItem:TodoItem
+            },
+            data: {
+                list: [],
+                inputValue: ''
+            },
+            methods: {
+                handleBtnClick: function () {
+                    this.list.push(this.inputValue)
+                    this.inputValue = ''
+                },
+                handleItemDelete:function(index){
+                    this.list.splice(index,1)
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

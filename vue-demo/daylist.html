@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue中的列表渲染</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="(items,index) of list" :key="items.id">
+            {{items.id}}-----{{items.text}}
+        </div>
+        <!-- 提升性能，加唯一的key值 -->
+        <!-- 修改数组不能通过修改下标的数据的方式,只能用Vue给的遍历方法
+           七种遍历方法: push pop shift unshift splice sort reverse
+           或改变引用地址
+           template  渲染数据 可以理解为占位符
+        -->
+        <!-- set方法
+            全局方法  和  实例方法
+            对象方法:
+            vm.$set(vm.userInfo,"address","beijing")
+            Vue.set(vm.userInfo,"address","beijing")
+            数组set方法:( 遍历方法  数组引用)
+            vm.userInfo
+            Vue.set(vm.userInfo,1,5)
+            vm.$set(vm.userInfo,1,5)
+        -->
+        <div v-for="(items,key,index) of userInfo">
+            {{items}}-----{{key}}-----{{index}}
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    {
+                        id: "06787801",
+                        text: "hello"
+                    },
+                    {
+                        id: "06787802",
+                        text: "Good"
+                    },
+                    {
+                        id: "06787803",
+                        text: "Bye"
+                    }
+                ],
+                userInfo: {
+                    name: "LKT",
+                    age: 18,
+                    gender: "male",
+                }
+                //直接修改对象的数据引用就可    换成一个新的对象
+            }
+        })
+    </script>
+</body>
+
+</html>

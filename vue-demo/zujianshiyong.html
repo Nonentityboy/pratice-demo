@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>组件使用的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+        1.用is解决BUG
+        2.子组件定义data必须是一个函数
+        3.ref写到标签里面 是为了获取这个DOM元素 
+        this.$emit 为了传递给父组件
+        -->
+        <counter ref="one" @change="handleChange"></counter>
+        <counter ref="two" @change="handleChange"></counter>
+        <div>{{total}}</div>
+        <!-- <div ref="reference" @click="handleClick">hhhhhh</div>
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table> -->
+    </div>
+    <script>
+        Vue.component('counter', {
+            data: function () {
+                return {
+                    number: 0
+                }
+            },
+            template: "<div @click='handleClick'>{{number}}</div>",
+            methods: {
+                handleClick: function () {
+                    this.number++
+                    this.$emit('change')
+                }
+            }
+        })
+        // 使用is属性
+        // Vue.component('row', {
+        //     // 子组件里面定义data,里面必须是函数  且为return形式,不能是对象
+        //     data: function () {
+        //         return {
+        //             content: 'this is content'
+        //         }
+        //     },
+        //     template: '<tr><td>{{content}}</td></tr>'
+        // })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                content: 'hello world',
+                total: 0
+            },
+            methods: {
+                handleChange: function () {
+                    this.total = this.$refs.one.number + this.$refs.two.number
+                }
+            },
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>setterAndgetter</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">{{fullName}}</div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                firstName: "Dell",
+                lastName: "Lee"
+            },
+            computed: {
+                fullName: {
+                    get: function () {
+                        return this.firstName + " " + this.lastName
+                    },
+                    set: function (value) {
+                        var arr = value.split(" ");
+                        this.firstName = arr[0];
+                        this.lastName = arr[1];
+                        console.log(value);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

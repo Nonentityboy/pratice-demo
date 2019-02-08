@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>hello world</title>
+        <script src="./vue.js"></script>
+    </head>
+    <body>
+        <div id="app">{{content}}</div>
+        <script>
+            // 1.创建Vue实例
+            var app = new Vue({
+                // el接管dom标签内容
+                el:'#app',
+                // 定义数据
+                data:{
+                    content:'hello world'
+                }
+            })
+            
+        </script>
+        <!-- 原生操作 -->
+        <!-- var dom = document.getElementById('app');
+        dom.innerHTML = "hello world"; 
+        setTimeout(function(){
+            dom.innerHTML = "bye world"
+        },2000)
+        -->
+    </body>
+</html> 
